@@ -100,13 +100,13 @@ if isnan(E_N)
 end
 % Differential equations
 % Ag, y(2), total amount of antigenic protein in the well, pmole
-dydt(1,1)=-(ID+MD)*AlphaAgE*VD*(Ag/Vp);
+dydt(1,1)=-(ID+MD)*AlphaAgE*VD*(Ag/Vp)-kel*Ag;
 
 % MS, y(5), maturation signal, particularly, LPS, for immature dendritic cells, ng
-dydt(2,1)=-(ID+MD)*AlphaAgE*VD*(MS/Vp);
+dydt(2,1)=-(ID+MD)*AlphaAgE*VD*(MS/Vp)-BetaMS*MS;
 
 % ID, y(6), immature dendritic cells, cells
-dydt(3,1)=-BetaID*ID-DeltaID*ID*(MS/Vp)/((MS/Vp)+KMS);
+dydt(3,1)=BetaID*(ID0-ID)-DeltaID*ID*(MS/Vp)/((MS/Vp)+KMS);
 
 % MD,	y(7), mature dendritic cells , cells
 dydt(4,1)=DeltaID*ID*(MS/Vp)/((MS/Vp)+KMS)-BetaMD*MD;
@@ -142,14 +142,14 @@ dydt((26+7*N):(25+13*N),1)=reshape(kext*pME -koff.*pM,6*N,1);
 dydt((26+13*N):(31+13*N),1)=-kin*M +(ones(1,N)*(koff.*pM))'+koffN.*cptM;
 
 % NT, y((35+13*N):(34+14*N)), naïve helper T cells,  cells
-dydt((32+13*N):(32+13*N),1)=MD*RhoNT-BetaNT*NT-sum(DeltaNT*D_N.*Fp.*NT);                                    %PREVIOUSLY: BetaNT*(NT0-NT)-DeltaNT*D_N.*NT;
+dydt((32+13*N):(32+13*N),1)=BetaNT*(NT0-NT)-sum(DeltaNT*D_N.*Fp.*NT);                                    %PREVIOUSLY: BetaNT*(NT0-NT)-DeltaNT*D_N.*NT;
 
 %AT_N, y((35+14*N):(34+15*N)), activated helper T cells derived from NT, cells
 dydt((33+13*N):(32+14*N),1)=DeltaNT*D_N.*Fp.*NT+RhoAT.*E_N.*AT_N-BetaAT*AT_N;
 
 % AT_M, y((35+15*N):(34+16*N)),	activated helper T cells derived from MT, cells
 sAt = E_N>=0;
-dydt((33+14*N):(32+15*N),1)= MD*RhoNT + sAt.*RhoAT.*E_N.*AT_N;
+dydt((33+14*N):(32+15*N),1)= BetaNT*NT0 + sAt.*RhoAT.*E_N.*AT_N;
 
 % NT0Rest, y((35+16*N):(34+17*N)), NT0Rest
 dydt((33+15*N):(32+16*N),1)=0.0;%MD*0.1616-0.3048*MT;%This says MT but it's actually NT0Rest

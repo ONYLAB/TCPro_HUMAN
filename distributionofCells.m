@@ -17,13 +17,13 @@ x0 = rand(6,1).*(ub-lb) + lb; %Random initial Start Point
 options = optimoptions('fmincon','Display','off');
 
 x = fmincon(fun,x0,[],[],[],[],lb,ub,[],options);
-% validate x
-sum(x);
-% 5th row is CD8+ so it will be depleted
-totcellafterdepletion = sum(x([1:4 6]));
-scale = 100.0/totcellafterdepletion;
-x = x*scale;
-x(5) = 0;
+% % validate x
+% sum(x);
+% % 5th row is CD8+ so it will be depleted
+% totcellafterdepletion = sum(x([1:4 6]));
+% scale = 100.0/totcellafterdepletion;
+% x = x*scale;
+% x(5) = 0;
 
 rng('shuffle');
 InitPBMC = rand*(MaxNumPBMCs-MinNumPBMCs) + MinNumPBMCs; %Random initial number of cells/mililiter

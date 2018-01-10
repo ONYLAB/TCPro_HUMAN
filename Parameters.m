@@ -1,11 +1,5 @@
 function Parameters(SimType,epitopes,HLA_DR)
 
-%% Celltype distribution
-MinNumPBMCs = 4e6;
-MaxNumPBMCs = 6e6;
-[ID0,NK,BC,CD4,CD8,MC] = collectdonorPBMC_analyze(MinNumPBMCs,MaxNumPBMCs);
-% ID0: the initial number of immature dendritic cell
-
 %% Therapeutic protein PK parameters
 % Vp: well volume
 Vp = 2e-3;%2.75; % L This is the Volume of the sample
@@ -15,6 +9,12 @@ Dose = SimType*SampleConcentration*Vp*1e12;  % pmole
 Endotoxin = 0.0042*1e3; %ng/L
 % NA: Avogadro constant
 NA = 6.0221367e23;
+
+%% Celltype distribution
+MinNumPBMCs = 4e6; %per ml
+MaxNumPBMCs = 6e6; %per ml
+[ID0,NK,BC,CD4,CD8,MC] = collectdonorPBMC_analyze(MinNumPBMCs,MaxNumPBMCs,Vp);
+% ID0: the initial number of immature dendritic cell
 
 %% T-epitope characteristics of therapeutic proteins
 % N: the number of T-epitope (protein-specific)

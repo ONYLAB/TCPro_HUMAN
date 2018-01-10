@@ -1,13 +1,14 @@
-function [DC,NK,BC,CD4,CD8,MC] = collectdonorPBMC_analyze(MinNumPBMCs,MaxNumPBMCs)
+function [DC,NK,BC,CD4,CD8,MC] = collectdonorPBMC_analyze(MinNumPBMCs,MaxNumPBMCs,Vp)
 
+Vp = Vp*1e3; %now in ml
 NumCellsper_ml(:,1) = distributionofCells(MinNumPBMCs,MaxNumPBMCs);
 
-DC = NumCellsper_ml(1);
-NK = NumCellsper_ml(2);
-BC = NumCellsper_ml(3);
-CD4 = NumCellsper_ml(4);
-CD8 = NumCellsper_ml(5);
-MC = NumCellsper_ml(6);
+DC = Vp*NumCellsper_ml(1);
+NK = Vp*NumCellsper_ml(2);
+BC = Vp*NumCellsper_ml(3);
+CD4 = Vp*NumCellsper_ml(4);
+CD8 = Vp*NumCellsper_ml(5);
+MC = Vp*NumCellsper_ml(6);
 
 % disp('Init Cell Counts');
 % disp(['DC: ' num2str(round(DC))]);
