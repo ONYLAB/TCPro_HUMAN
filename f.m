@@ -3,7 +3,7 @@ function dydt=f(t,y,pars) %#ok<INUSL>
 % Parameter vector
 NA=pars(1);
 % Therapeutic protein PK parameters
-Dose=pars(2); %#ok<NASGU>
+kel=pars(2); %#ok<NASGU>
 Vp=pars(3);
 % T-epitope characteristics of therapeutic proteins
 N=pars(4);
@@ -100,10 +100,10 @@ if isnan(E_N)
 end
 % Differential equations
 % Ag, y(2), total amount of antigenic protein in the well, pmole
-dydt(1,1)=-(ID+MD)*AlphaAgE*VD*(Ag/Vp)-kel*Ag;
+dydt(1,1)=)-kel*Ag; %-(ID+MD)*AlphaAgE*VD*(Ag/Vp
 
 % MS, y(5), maturation signal, particularly, LPS, for immature dendritic cells, ng
-dydt(2,1)=-(ID+MD)*AlphaAgE*VD*(MS/Vp)-BetaMS*MS;
+dydt(2,1)=-BetaMS*MS; %-(ID+MD)*AlphaAgE*VD*(MS/Vp)
 
 % ID, y(6), immature dendritic cells, cells
 dydt(3,1)=BetaID*(ID0-ID)-DeltaID*ID*(MS/Vp)/((MS/Vp)+KMS);

@@ -2,17 +2,23 @@ function Parameters(SimType,epitopes,HLA_DR)
 
 %% Therapeutic protein PK parameters
 % Vp: well volume
-Vp = 2e-3;%2.75; % L This is the Volume of the sample
-SampleConcentration = 0.3e-6; %Molar This is the actual concentration of the samples with respect to the cell-excluded volume
-Dose = SimType*SampleConcentration*Vp*1e12;  % pmole
+Vp = 2.75; % L This is the Volume of the sample
+% SampleConcentration = 0.3e-6; %Molar This is the actual concentration of the samples with respect to the cell-excluded volume
+% Dose = SimType*SampleConcentration*Vp*1e12;  % pmole
+VatreptacogAlfaDose = 80; %ug per kg patient
+PatientWeighth = 75; %kg
+TotalDrugAmount = PatientWeighth*VatreptacogAlfaDose; %ug
+VatAlfaWeight = 45.18e3; %Daltons = g/mol
+
+Dose = (TotalDrugAmount*1e-3)/VatAlfaWeight*1e12; %pmol 
 
 Endotoxin = 0.0042*1e3; %ng/L
 % NA: Avogadro constant
 NA = 6.0221367e23;
 
 %% Celltype distribution
-MinNumPBMCs = 4e6; %per ml
-MaxNumPBMCs = 6e6; %per ml
+MinNumPBMCs = 1e6; %per ml blood http://www.systemsimmunology.org/cores/human_correlation_protocols.html
+MaxNumPBMCs = 2e6; %per ml blood http://www.systemsimmunology.org/cores/human_correlation_protocols.html
 [ID0,NK,BC,CD4,CD8,MC] = collectdonorPBMC_analyze(MinNumPBMCs,MaxNumPBMCs,Vp);
 % ID0: the initial number of immature dendritic cell
 
@@ -29,7 +35,7 @@ numHLADR = 1e5;
 
 %% Dendritic cells
 % BetaMS: decay rate for the maturation signals (LPS)
-BetaMS=0.0;  % day-1
+BetaMS=0.3696;  % day-1
 
 % BetaID:	death rate of immature dendritic cells.
 BetaID=0.0924; % day-1
@@ -163,7 +169,7 @@ FT0=ones(N,1)*0.0; % cells
 %% Parameter vector
 pars(1)=NA;
 % Therapeutic protein PK parameters
-pars(2)=Dose;
+pars(2)=kel;
 pars(3)=Vp;
 % T-epitope characteristics of therapeutic proteins
 pars(4)=N;

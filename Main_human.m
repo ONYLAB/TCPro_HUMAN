@@ -10,9 +10,9 @@ rng(donor_ID);
 % Main simulation
 
 %This is the scale when you take aliquots 2ml to 100 mul
-VolSample = 2000; %muL
-VolAliquot = 100; %muL
-scaleVOL = VolAliquot/VolSample;
+% VolSample = 2000; %muL
+% VolAliquot = 100; %muL
+scaleVOL = 1;%VolAliquot/VolSample;
 
 numberoftimespamples = 100;
 
