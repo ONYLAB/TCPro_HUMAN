@@ -12,7 +12,7 @@ rng(donor_ID);
 %This is the scale when you take aliquots 2ml to 100 mul
 % VolSample = 2000; %muL
 % VolAliquot = 100; %muL
-scaleVOL = 1;%VolAliquot/VolSample;
+% scaleVOL = 1;%VolAliquot/VolSample;
 
 numberoftimespamples = 100;
 
@@ -24,13 +24,14 @@ load Parameters.mat; %#ok<LOAD>
 options = odeset('RelTol',1e-10, 'AbsTol',1e-10);
 % DayLimit = 8;
 IncubationTime = 18/24; %days
+Frequency = 1; %Day-1
 
 % First dose
 % Initial condition vector
 yic1 = [Ag0;MS0; ID0; MD0; cpE0; cptE0;cptME0;cptM0;AgE0;pE0; ME0;pME0; pM0; M0;NT0; AT_N0; AT_M0;MT0; FT0];
 
 % First dosing interval, protein specific
-tspan1 =linspace(0,DayLimit,numberoftimespamples);
+tspan1 =linspace(0,1/Frequency,numberoftimespamples);
 
 % Call ODE
 [T1,Y1]=ode15s(@f, tspan1, yic1, options,pars); %#ok<NODEF>
@@ -39,55 +40,62 @@ tspan1 =linspace(0,DayLimit,numberoftimespamples);
 t_record=T1;
 y_record=Y1;
 
+% Subsequent doses
+for num_dose=1:DayLimit  % number of doses, protein specific
+    
+    % Get Initial conditions
+    Ag1=y_record(numel(t_record),1);
+    MS1=y_record(numel(t_record),2); %No new Maturation signal
+    ID1=y_record(numel(t_record),3);
+    MD1=y_record(numel(t_record),4);
+    cpE1=y_record(numel(t_record),5);
+    cptE1=y_record(numel(t_record),6);
+    cptME1=y_record(numel(t_record),(7:12));
+    cptM1=y_record(numel(t_record),(13:18));
+    AgE1=y_record(numel(t_record),19);
+    pE1=y_record(numel(t_record),(19+1):(19+N));
+    ME1=y_record(numel(t_record),(20+N):(25+N));
+    pME1=y_record(numel(t_record),(26+N):(25+7*N));
+    pM1=y_record(numel(t_record),(26+7*N):(25+13*N));
+    M1=y_record(numel(t_record),(26+13*N):(31+13*N));
+    NT1=y_record(numel(t_record),(32+13*N):(32+13*N));
+    AT_N1=y_record(numel(t_record),(33+13*N):(32+14*N));
+    AT_M1=y_record(numel(t_record),(33+14*N):(32+15*N));
+    MT1=y_record(numel(t_record),(33+15*N):(32+16*N));
+    FT1=y_record(numel(t_record),(33+16*N):(32+17*N));
+    
+    % Initial condition vector
+%     AT_M1 = 0.0*AT_M1; %This is a place holder for proliferation
+    %     MT1 = 0.0*MT1; not 0 now, it's the rest of the naive bystanding t-cells
+%     FT1 = 0.0*FT1;
+    yic2 = [Ag0, MS0, ID1, MD1, cpE1, cptE1,cptME1,cptM1,AgE1,pE1,  ME1,pME1,  pM1, M1,NT1, AT_N1,AT_M1,MT1,FT1]';
+%     yic2 = yic2;
+    
+    if num_dose ~= DayLimit        
+        Duration = 1/Frequency; %Frequency in Days
+    else
+        Duration = IncubationTime; %IncubationTime in Days        
+    end
 
-% Displacement
-% Get Initial conditions
-Ag1=y_record(numel(t_record),1);
-MS1=y_record(numel(t_record),2); %No new Maturation signal
-ID1=y_record(numel(t_record),3);
-MD1=y_record(numel(t_record),4);
-cpE1=y_record(numel(t_record),5);
-cptE1=y_record(numel(t_record),6);
-cptME1=y_record(numel(t_record),(7:12));
-cptM1=y_record(numel(t_record),(13:18));
-AgE1=y_record(numel(t_record),19);
-pE1=y_record(numel(t_record),(19+1):(19+N));
-ME1=y_record(numel(t_record),(20+N):(25+N));
-pME1=y_record(numel(t_record),(26+N):(25+7*N));
-pM1=y_record(numel(t_record),(26+7*N):(25+13*N));
-M1=y_record(numel(t_record),(26+13*N):(31+13*N));
-NT1=y_record(numel(t_record),(32+13*N):(32+13*N));
-AT_N1=y_record(numel(t_record),(33+13*N):(32+14*N));
-AT_M1=y_record(numel(t_record),(33+14*N):(32+15*N));
-MT1=y_record(numel(t_record),(33+15*N):(32+16*N));
-FT1=y_record(numel(t_record),(33+16*N):(32+17*N));
-
-% Initial condition vector
-AT_M1 = 0.0*AT_M1; %This is a place holder for proliferation
-%     MT1 = 0.0*MT1; not 0 now, it's the rest of the naive bystanding t-cells
-FT1 = 0.0*FT1;
-yic2 = [Ag1, MS1, ID1, MD1, cpE1/scaleVOL, cptE1/scaleVOL,cptME1/scaleVOL,cptM1/scaleVOL,AgE1/scaleVOL,pE1/scaleVOL,  ME1/scaleVOL,pME1/scaleVOL,  pM1/scaleVOL, M1/scaleVOL,NT1, AT_N1,AT_M1,MT1,FT1]';
-yic2 = yic2*scaleVOL;
-
-% dosing interval
-t_start=DayLimit;
-t_end=DayLimit+IncubationTime;
-tspan2 = linspace(t_start, t_end, numberoftimespamples);
-
-%pars, Vp changes
-pars(3)=Vp*scaleVOL;
-pars(37+13*N)=ID0*scaleVOL;
-pars((45+13*N):(44+14*N))=NT0*scaleVOL;
-pars((45+14*N):(44+15*N))=MT0*scaleVOL;
-
-% Call ODE
-[T2,Y2]=ode15s(@f, tspan2, yic2, options,pars);
-
-% Record the result into new matrix
-t_record=[t_record;T2];
-y_record=[y_record; Y2];
-
-
+    % dosing interval
+    t_start=num_dose/Frequency;
+    t_end=t_start+Duration;
+    tspan2 = linspace(t_start, t_end, numberoftimespamples);
+    
+%     %pars, Vp changes
+%     pars(3)=Vp;
+%     pars(37+13*N)=ID0;
+%     pars((45+13*N):(44+14*N))=NT0;
+%     pars((45+14*N):(44+15*N))=MT0;
+    
+    % Call ODE
+    [T2,Y2]=ode15s(@f, tspan2, yic2, options,pars);
+    
+    % Record the result into new matrix
+    t_record=[t_record;T2];
+    y_record=[y_record; Y2];
+    
+end
 
 
 % Output all state variables
@@ -161,30 +169,30 @@ save(savefile, 'koff', 't_record','Ag_vector','MS_vector','ID_vector','MD_vector
     'ME_vector','pME_vector', 'pM_vector', 'M_vector', 'NT_vector', 'AT_N_vector', 'AT_M_vector', 'MT_vector',...
     'FT_vector','Total_pM');
 
-% % % % % % % % % % % % % % % % % %
-% figure
-% LT = 3; %Line thickness
-% AxFS = 24; %Ax Fontsize
-% AxLW = 2; %Ax LineWidth
-% xlabeltext = 'Time (days)';
-% ylabeltext = '#cells';
-% legenddata = {'Immature DC','Mature DC','Naive T','Activated T','Bystander T'};
-% 
-% plot(t_record,ID_vector(:,1),'LineWidth',LT);
-% hold on
-% plot(t_record,MD_vector(:,1),'LineWidth',LT);
-% plot(t_record,NT_vector(:,1),'LineWidth',LT);
-% plot(t_record,AT_N_vector(:,1),'LineWidth',LT);
+% % % % % % % % % % % % % % % % %
+figure
+LT = 3; %Line thickness
+AxFS = 24; %Ax Fontsize
+AxLW = 2; %Ax LineWidth
+xlabeltext = 'Time (days)';
+ylabeltext = '#cells';
+legenddata = {'Immature DC','Mature DC','Naive T','Activated T'};
+
+plot(t_record,ID_vector(:,1),'LineWidth',LT);
+hold on
+plot(t_record,MD_vector(:,1),'LineWidth',LT);
+plot(t_record,NT_vector(:,1),'LineWidth',LT);
+plot(t_record,AT_N_vector(:,1),'LineWidth',LT);
 % plot(t_record,MT_vector(:,1),'LineWidth',LT);
-% 
-% set(gcf,'color','w');
-% set(gca,'fontsize', AxFS);
-% set(gca,'LineWidth',AxLW);
-% legend(legenddata,'Location','eastoutside');
-% xlabel(xlabeltext);
-% ylabel(ylabeltext);
-% set(gca,'yscale','log')
-% axis square
+
+set(gcf,'color','w');
+set(gca,'fontsize', AxFS);
+set(gca,'LineWidth',AxLW);
+legend(legenddata,'Location','eastoutside');
+xlabel(xlabeltext);
+ylabel(ylabeltext);
+set(gca,'yscale','log')
+axis square
 
 response = AT_M_vector(end,1);
 numactivatedT = AT_N_vector(end,1) + MD_vector(end,1);

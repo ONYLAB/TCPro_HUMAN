@@ -100,7 +100,7 @@ if isnan(E_N)
 end
 % Differential equations
 % Ag, y(2), total amount of antigenic protein in the well, pmole
-dydt(1,1)=)-kel*Ag; %-(ID+MD)*AlphaAgE*VD*(Ag/Vp
+dydt(1,1)=-kel*Ag; %-(ID+MD)*AlphaAgE*VD*(Ag/Vp
 
 % MS, y(5), maturation signal, particularly, LPS, for immature dendritic cells, ng
 dydt(2,1)=-BetaMS*MS; %-(ID+MD)*AlphaAgE*VD*(MS/Vp)

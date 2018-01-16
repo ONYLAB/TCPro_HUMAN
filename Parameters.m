@@ -2,19 +2,24 @@ function Parameters(SimType,epitopes,HLA_DR)
 
 %% Therapeutic protein PK parameters
 % Vp: well volume
-Vp = 2.75; % L This is the Volume of the sample
 % SampleConcentration = 0.3e-6; %Molar This is the actual concentration of the samples with respect to the cell-excluded volume
 % Dose = SimType*SampleConcentration*Vp*1e12;  % pmole
-VatreptacogAlfaDose = 80; %ug per kg patient
+VatreptacogAlfaDose = 83; %ug per kg patient TO MAKE IT 1.8 nM rFVIIa shown in the papers sent by Million
 PatientWeighth = 75; %kg
+Vpperkg = 39e-3; %L/kg 
+Vp = Vpperkg*PatientWeighth;%2.75;% L This is the Volume of the sample
+
 TotalDrugAmount = PatientWeighth*VatreptacogAlfaDose; %ug
 VatAlfaWeight = 45.18e3; %Daltons = g/mol
 
-Dose = (TotalDrugAmount*1e-3)/VatAlfaWeight*1e12; %pmol 
+Dose = (TotalDrugAmount*1e-6)/VatAlfaWeight*1e12; %pmol 
 
 Endotoxin = 0.0042*1e3; %ng/L
 % NA: Avogadro constant
 NA = 6.0221367e23;
+
+% Drug Elimination Rate Day-1
+kel = 13; %log(2)/(2.5/24);
 
 %% Celltype distribution
 MinNumPBMCs = 1e6; %per ml blood http://www.systemsimmunology.org/cores/human_correlation_protocols.html
@@ -96,13 +101,13 @@ VE=0.05*VD; % L
 RhoNT=0.1432; % day-1
 
 %BetaNT: death rate of naive helper T cells
-BetaNT=0.3048;%%PREVIOUSLY:0.018; % day-1
+BetaNT=0.018;%%PREVIOUSLY:0.018; % day-1
 
 %DeltaNT: maximum activation rate of naive helper T cells
 DeltaNT=1.5; % day-1
 
 % RhoAT: maximum proliferation rate for activated helper T cells
-RhoAT=1.5; % day-1
+RhoAT=0.5973; % day-1
 
 %BetaAT: death rate of activated helper T cells
 BetaAT=0.18; % day-1
