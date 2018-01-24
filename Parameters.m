@@ -117,7 +117,7 @@ BetaAT=0.18; % day-1
 Ag0=Dose; % pmole
 
 % MS0: Maturation signal (MS), particularly, endotoxin, LPS
-MS0=Endotoxin*Vp;%5*70; % ng
+MS0=0;%Endotoxin*Vp;%5*70; % ng
 
 % MD0: the initial number of mature dendritic cells
 MD0=0; % cells
@@ -257,11 +257,11 @@ function Affinity_DR = givekon(epitopesequence,HLAtext)
 % data(1).Sequence = 'epitopesequence'
 % data(1).Header = 'Seq'
 % fastawrite('example.fsa',data);
-if exist('out.dat')==0 %#ok<EXIST>
-    dlmwrite('example.fsa',epitopesequence,'')
-    command = ['netMHCIIpan -f example.fsa -inptype 1 -xls -xlsfile out.dat -a ' HLAtext];
-    [s,m] = unix(command);
-end
-table = readtable('out.dat');
-Affinity_DR(1) = table{1,'nM'};
-Affinity_DR(2) = table{1,'nM_1'};
+% if exist('out.dat')==0 %#ok<EXIST>
+%     dlmwrite('example.fsa',epitopesequence,'')
+%     command = ['netMHCIIpan -f example.fsa -inptype 1 -xls -xlsfile out.dat -a ' HLAtext];
+%     [s,m] = unix(command);
+% end
+% table = readtable('out.dat');
+Affinity_DR(1) = 1e5;%table{1,'nM'};
+Affinity_DR(2) = 1e5;%table{1,'nM_1'};
