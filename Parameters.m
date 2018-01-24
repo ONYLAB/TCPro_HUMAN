@@ -13,8 +13,13 @@ TotalDrugAmount = PatientWeighth*VatreptacogAlfaDose; %ug
 VatAlfaWeight = 45.18e3; %Daltons = g/mol
 
 Dose = (TotalDrugAmount*1e-6)/VatAlfaWeight*1e12; %pmol 
+VzDrug = 88e-3; %L/kg
+Dose = Dose/VzDrug*Vpperkg; %pmol %Scaling
 
-Endotoxin = 0.0042*1e3; %ng/L
+Endotoxin = 0.1; %ng/mg drug%0.0042*1e3; %ng/L
+Endotoxin = Endotoxin*(TotalDrugAmount*1e-3); %ng
+VzEndo = 49.8e-3; %L/kg
+Endotoxin = Endotoxin/VzEndo*Vpperkg; %Scaling %ng
 % NA: Avogadro constant
 NA = 6.0221367e23;
 
@@ -117,7 +122,7 @@ BetaAT=0.18; % day-1
 Ag0=Dose; % pmole
 
 % MS0: Maturation signal (MS), particularly, endotoxin, LPS
-MS0=Endotoxin*Vp;%5*70; % ng
+MS0=Endotoxin;%5*70; % ng
 
 % MD0: the initial number of mature dendritic cells
 MD0=0; % cells
