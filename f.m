@@ -149,7 +149,7 @@ dydt((33+13*N):(32+14*N),1)=DeltaNT*D_N.*Fp.*NT+RhoAT.*E_N.*AT_N-BetaAT*AT_N;
 
 % AT_M, y((35+15*N):(34+16*N)),	activated helper T cells derived from MT, cells
 sAt = E_N>=0;
-dydt((33+14*N):(32+15*N),1)= BetaNT*NT0 + sAt.*RhoAT.*E_N.*AT_N;
+dydt((33+14*N):(32+15*N),1)= BetaNT*Fp.*NT0 + sAt.*RhoAT.*E_N.*AT_N;
 
 % NT0Rest, y((35+16*N):(34+17*N)), NT0Rest
 dydt((33+15*N):(32+16*N),1)=0.0;%MD*0.1616-0.3048*MT;%This says MT but it's actually NT0Rest

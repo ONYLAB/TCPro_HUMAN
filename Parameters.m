@@ -14,17 +14,17 @@ VatAlfaWeight = 45.18e3; %Daltons = g/mol
 
 Dose = (TotalDrugAmount*1e-6)/VatAlfaWeight*1e12; %pmol 
 VzDrug = 88e-3; %L/kg
-Dose = Dose/VzDrug*Vpperkg; %pmol %Scaling
+Dose = SimType*Dose/VzDrug*Vpperkg; %pmol %Scaling
 
 Endotoxin = 0.1; %ng/mg drug%0.0042*1e3; %ng/L
 Endotoxin = Endotoxin*(TotalDrugAmount*1e-3); %ng
 VzEndo = 49.8e-3; %L/kg
-Endotoxin = Endotoxin/VzEndo*Vpperkg; %Scaling %ng
+Endotoxin = SimType*Endotoxin/VzEndo*Vpperkg; %Scaling %ng
 % NA: Avogadro constant
 NA = 6.0221367e23;
 
 % Drug Elimination Rate Day-1
-kel = 13; %log(2)/(2.5/24);
+kel = 6.43; %log(2)/(2.5/24);
 
 %% Celltype distribution
 MinNumPBMCs = 1e6; %per ml blood http://www.systemsimmunology.org/cores/human_correlation_protocols.html
@@ -45,7 +45,7 @@ numHLADR = 1e5;
 
 %% Dendritic cells
 % BetaMS: decay rate for the maturation signals (LPS)
-BetaMS=0.3696;  % day-1
+BetaMS=0.3301;  % day-1 log(2)/(50.4/24)
 
 % BetaID:	death rate of immature dendritic cells.
 BetaID=0.0924; % day-1
