@@ -169,30 +169,30 @@ save(savefile, 'koff', 't_record','Ag_vector','MS_vector','ID_vector','MD_vector
     'ME_vector','pME_vector', 'pM_vector', 'M_vector', 'NT_vector', 'AT_N_vector', 'AT_M_vector', 'MT_vector',...
     'FT_vector','Total_pM');
 
-% % % % % % % % % % % % % % % % %
-figure
-LT = 3; %Line thickness
-AxFS = 24; %Ax Fontsize
-AxLW = 2; %Ax LineWidth
-xlabeltext = 'Time (days)';
-ylabeltext = '#cells';
-legenddata = {'Immature DC','Mature DC','Naive T','Activated T'};
-
-plot(t_record,ID_vector(:,1),'LineWidth',LT);
-hold on
-plot(t_record,MD_vector(:,1),'LineWidth',LT);
-plot(t_record,NT_vector(:,1),'LineWidth',LT);
-plot(t_record,AT_N_vector(:,1),'LineWidth',LT);
-% plot(t_record,MT_vector(:,1),'LineWidth',LT);
-
-set(gcf,'color','w');
-set(gca,'fontsize', AxFS);
-set(gca,'LineWidth',AxLW);
-legend(legenddata,'Location','eastoutside');
-xlabel(xlabeltext);
-ylabel(ylabeltext);
-set(gca,'yscale','log')
-axis square
+% % % % % % % % % % % % % % % % % %
+% figure
+% LT = 3; %Line thickness
+% AxFS = 24; %Ax Fontsize
+% AxLW = 2; %Ax LineWidth
+% xlabeltext = 'Time (days)';
+% ylabeltext = '#cells';
+% legenddata = {'Immature DC','Mature DC','Naive T','Activated T'};
+% 
+% plot(t_record,ID_vector(:,1),'LineWidth',LT);
+% hold on
+% plot(t_record,MD_vector(:,1),'LineWidth',LT);
+% plot(t_record,NT_vector(:,1),'LineWidth',LT);
+% plot(t_record,AT_N_vector(:,1),'LineWidth',LT);
+% % plot(t_record,MT_vector(:,1),'LineWidth',LT);
+% 
+% set(gcf,'color','w');
+% set(gca,'fontsize', AxFS);
+% set(gca,'LineWidth',AxLW);
+% legend(legenddata,'Location','eastoutside');
+% xlabel(xlabeltext);
+% ylabel(ylabeltext);
+% set(gca,'yscale','log')
+% axis square
 
 response = AT_M_vector(end,1);
 numactivatedT = AT_N_vector(end,1) + MD_vector(end,1);

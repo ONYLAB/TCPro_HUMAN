@@ -12,13 +12,14 @@ Vp = Vpperkg*PatientWeighth;%2.75;% L This is the Volume of the sample
 TotalDrugAmount = PatientWeighth*VatreptacogAlfaDose; %ug
 VatAlfaWeight = 45.18e3; %Daltons = g/mol
 
-Dose = (TotalDrugAmount*1e-6)/VatAlfaWeight*1e12; %pmol 
-VzDrug = 88e-3; %L/kg
-Dose = SimType*Dose/VzDrug*Vpperkg; %pmol %Scaling
+% Dose = (TotalDrugAmount*1e-6)/VatAlfaWeight*1e12; %pmol 
+% VzDrug = 88e-3; %L/kg
+% Dose = SimType*Dose/VzDrug*Vpperkg; %pmol %Scaling
+Dose = 20.88e3*Vp; %pmol = pmol/L * L
 
 Endotoxin = 0.1; %ng/mg drug%0.0042*1e3; %ng/L
-Endotoxin = Endotoxin*(TotalDrugAmount*1e-3); %ng
-VzEndo = 49.8e-3; %L/kg
+Endotoxin = Endotoxin*(TotalDrugAmount*1e-3); %ng = (ng/mg * mg)
+VzEndo = 49.8e-3; %L/kg Volume of distribution
 Endotoxin = SimType*Endotoxin/VzEndo*Vpperkg; %Scaling %ng
 % NA: Avogadro constant
 NA = 6.0221367e23;
