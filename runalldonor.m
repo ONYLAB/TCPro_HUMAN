@@ -1,4 +1,4 @@
-function [responsevector,decision] = runalldonor(theepitope)
+function [responsevector,decision] = runalldonor(theepitope,ParChangeIndex,ParChange)
 
 allelelist = readtable('detailedAlleleshaplotypeddonorNETMHCIIreadablewithoutDQBno345.dat','Delimiter',',');
 epitopes{1} = theepitope;
