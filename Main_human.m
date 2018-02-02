@@ -1,6 +1,6 @@
 % This code were applied for simulating in vivo immune response in human against Adalimumab.
 % The dosing regimen was based on clinical dosing regimen of Adalimumab.
-function [response,kon,numactivatedT] = Main_human(DayLimit,SimType,epitopes,HLA_DR,donor_ID) %#ok<STOUT>
+function [response,kon,numactivatedT] = Main_human(DayLimit,SimType,epitopes,HLA_DR,donor_ID,ParChangeIndex,ParChange) %#ok<STOUT>
 
 % clc
 close all
@@ -19,6 +19,10 @@ numberoftimespamples = 100;
 % Load the parameters
 Parameters(SimType,epitopes,HLA_DR); %SimType=1 if with Sample, 0 if without
 load Parameters.mat; %#ok<LOAD>
+pars(ParChangeIndex) = ParChange*pars(ParChangeIndex);
+Ag0=pars((44+15*N)+1);
+MS0=pars((44+15*N)+2);
+ME0=pars((39+13*N):(44+13*N));
 
 % Run the ODEs
 options = odeset('RelTol',1e-10, 'AbsTol',1e-10);
@@ -161,13 +165,13 @@ cptM_NUMBER_M6=cptM_vector(:,(5*N+1):(6*N))*1E-12*NA; % T-epitope-MHC II complex
 Total_cptM(:,1:N)=cptM_NUMBER_M1+cptM_NUMBER_M2+cptM_NUMBER_M3+cptM_NUMBER_M4+cptM_NUMBER_M5+cptM_NUMBER_M6;   %#ok<NASGU> % Total number of T-epitope-MHC II complex
 
 
-% Save the results
-savefile='results.mat';
-
-save(savefile, 'koff', 't_record','Ag_vector','MS_vector','ID_vector','MD_vector',...
-    'cpE_vector', 'cptE_vector', 'cptME_vector', 'cptM_vector', 'AgE_vector','pE_vector', ...
-    'ME_vector','pME_vector', 'pM_vector', 'M_vector', 'NT_vector', 'AT_N_vector', 'AT_M_vector', 'MT_vector',...
-    'FT_vector','Total_pM');
+% % Save the results
+% savefile='results.mat';
+% 
+% save(savefile, 'koff', 't_record','Ag_vector','MS_vector','ID_vector','MD_vector',...
+%     'cpE_vector', 'cptE_vector', 'cptME_vector', 'cptM_vector', 'AgE_vector','pE_vector', ...
+%     'ME_vector','pME_vector', 'pM_vector', 'M_vector', 'NT_vector', 'AT_N_vector', 'AT_M_vector', 'MT_vector',...
+%     'FT_vector','Total_pM');
 
 % % % % % % % % % % % % % % % % % %
 % figure

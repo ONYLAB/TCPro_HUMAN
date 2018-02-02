@@ -218,6 +218,8 @@ pars(38+13*N)=cpE0;
 pars((39+13*N):(44+13*N))=ME0;
 pars((45+13*N):(44+14*N))=NT0;
 pars((45+14*N):(44+15*N))=MT0;
+pars((44+15*N)+1)=Ag0;
+pars((44+15*N)+2)=MS0;
 pars=pars';
 
 save Parameters.mat
