@@ -58,7 +58,7 @@ DeltaID=1.66; % day-1
 KMS= 9.852E3; % ng/L
 
 % BetaMD:	death rate of mature dendritic cells
-BetaMD=0.2310; % day-1
+BetaMD=1.39;%0.2310; % day-1
 
 %% Antigen presentation
 
@@ -69,7 +69,7 @@ konN=ones(6,1)*8.64*1E-3; %  pM-1day-1 NOT USED
 koffN=8.64*1E-3*ones(6,1)*4000; %  day-1 NOT USED
 
 % AlphaAgE:  Ag internalization rate constant by mature dendritic cells
-AlphaAgE=14.4; %day-1
+AlphaAgE=10.8;%14.4; %day-1
 
 %	BetaAgE	: degradation rate for AgE in acidic vesicles
 BetaAgE = 17.28; % day-1

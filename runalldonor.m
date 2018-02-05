@@ -30,11 +30,11 @@ coldata = [];
 n=3;
 for Daylimit = 5:8
     for i = 1:n
-        [response(Daylimit-4,i,1),kon,ELISPOT(Daylimit-4,i,1)] = Main_human(Daylimit,0,epitopes,HLA_DR,donor_ID*i);%SimType=0, with sample
+        [response(Daylimit-4,i,1),kon,ELISPOT(Daylimit-4,i,1)] = Main_human(Daylimit,0,epitopes,HLA_DR,donor_ID*i*2);%SimType=0, with sample
         status = movefile('Parameters.mat',['D' num2str(Daylimit) '_CULTURE_n' num2str(i) 'Parameters.mat']);
         status = movefile('results.mat',['D' num2str(Daylimit) '_CULTURE_n' num2str(i) 'results.mat']);
         
-        [response(Daylimit-4,i,2),kon,ELISPOT(Daylimit-4,i,2)] = Main_human(Daylimit,1,epitopes,HLA_DR,donor_ID*i);%SimType=1, with sample
+        [response(Daylimit-4,i,2),kon,ELISPOT(Daylimit-4,i,2)] = Main_human(Daylimit,1,epitopes,HLA_DR,donor_ID*i*2);%SimType=1, with sample
         status = movefile('Parameters.mat',['D' num2str(Daylimit) '_SAMPLE_n' num2str(i) 'Parameters.mat']);
         status = movefile('results.mat',['D' num2str(Daylimit) '_SAMPLE_n' num2str(i) 'results.mat']);
     end
@@ -42,7 +42,7 @@ for Daylimit = 5:8
     responsevector(Daylimit-4,:) = response(Daylimit-4,:,2)./response(Daylimit-4,:,1);
 end
 
-decision = sign(sum(sum(responsevector>1.9)));
+decision = sign(sum(sum(responsevector>2.0)));
 
 % ELISPOTresp = mean(ELISPOT(Daylimit-4,:,2)) / mean(ELISPOT(Daylimit-4,:,1));
 % [~,p,~,~] = ttest2(ELISPOT(Daylimit-4,:,2),ELISPOT(Daylimit-4,:,1));

@@ -65,7 +65,7 @@ for num_dose=1:DayLimit  % number of doses, protein specific
     FT1=y_record(numel(t_record),(33+16*N):(32+17*N));
     
     % Initial condition vector
-%     AT_M1 = 0.0*AT_M1; %This is a place holder for proliferation
+    AT_M1 = 0.0*AT_M1; %This is a place holder for proliferation
     %     MT1 = 0.0*MT1; not 0 now, it's the rest of the naive bystanding t-cells
 %     FT1 = 0.0*FT1;
     yic2 = [Ag0, MS0, ID1, MD1, cpE1, cptE1,cptME1,cptM1,AgE1,pE1,  ME1,pME1,  pM1, M1,NT1, AT_N1,AT_M1,MT1,FT1]';
