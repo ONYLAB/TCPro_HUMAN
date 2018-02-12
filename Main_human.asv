@@ -194,5 +194,5 @@ save(savefile, 'koff', 't_record','Ag_vector','MS_vector','ID_vector','MD_vector
 % set(gca,'yscale','log')
 % axis square
 
-response = AT_M_vector([600:100:900],1)';
+response = AT_M_vector([],1);
 numactivatedT = AT_N_vector(end,1) + MD_vector(end,1);

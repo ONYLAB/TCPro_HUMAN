@@ -19,7 +19,7 @@ Dose = 20.88e3*Vp; %pmol = pmol/L * L
 
 Endotoxin = 0.1; %ng/mg drug%0.0042*1e3; %ng/L
 Endotoxin = Endotoxin*(TotalDrugAmount*1e-3); %ng = (ng/mg * mg)
-VzEndo = 49.8e-3; %L/kg Volume of distribution
+VzEndo = 54e-3; %L/kg Volume of distribution
 Endotoxin = SimType*Endotoxin/VzEndo*Vpperkg; %Scaling %ng
 % NA: Avogadro constant
 NA = 6.0221367e23;
@@ -28,8 +28,8 @@ NA = 6.0221367e23;
 kel = 6.43; %log(2)/(2.5/24);
 
 %% Celltype distribution
-MinNumPBMCs = 1e6; %per ml blood http://www.systemsimmunology.org/cores/human_correlation_protocols.html
-MaxNumPBMCs = 2e6; %per ml blood http://www.systemsimmunology.org/cores/human_correlation_protocols.html
+MinNumPBMCs = 1e6; %per ml blood http://cvi.asm.org/content/17/6/910.full http://www.systemsimmunology.org/cores/human_correlation_protocols.html
+MaxNumPBMCs = 2e6; %per ml blood http://cvi.asm.org/content/17/6/910.full http://www.systemsimmunology.org/cores/human_correlation_protocols.html
 [ID0,NK,BC,CD4,CD8,MC] = collectdonorPBMC_analyze(MinNumPBMCs,MaxNumPBMCs,Vp);
 % ID0: the initial number of immature dendritic cell
 
@@ -46,7 +46,7 @@ numHLADR = 1e5;
 
 %% Dendritic cells
 % BetaMS: decay rate for the maturation signals (LPS)
-BetaMS=0.3301;  % day-1 log(2)/(50.4/24)
+BetaMS=0.3989;  % day-1 log(2)/(50.4/24)
 
 % BetaID:	death rate of immature dendritic cells.
 BetaID=0.0924; % day-1
@@ -58,7 +58,7 @@ DeltaID=1.66; % day-1
 KMS= 9.852E3; % ng/L
 
 % BetaMD:	death rate of mature dendritic cells
-BetaMD=1.39;%0.2310; % day-1
+BetaMD=1.39; %0.2310;% day-1
 
 %% Antigen presentation
 
@@ -69,7 +69,7 @@ konN=ones(6,1)*8.64*1E-3; %  pM-1day-1 NOT USED
 koffN=8.64*1E-3*ones(6,1)*4000; %  day-1 NOT USED
 
 % AlphaAgE:  Ag internalization rate constant by mature dendritic cells
-AlphaAgE=10.8;%14.4; %day-1
+AlphaAgE=12;%14.4; %10.8;%day-1
 
 %	BetaAgE	: degradation rate for AgE in acidic vesicles
 BetaAgE = 17.28; % day-1
@@ -99,7 +99,7 @@ KpM_N = 400;  % number of complex
 VD=0.8463e-012; % L
 
 % VE: volume of endosomes in a dendritic cell
-VE=0.05*VD; % L
+VE=5.32e-15; %0.05*VD; % L
 
 
 %% T helper cells
@@ -113,7 +113,7 @@ BetaNT=0.018;%%PREVIOUSLY:0.018; % day-1
 DeltaNT=1.5; % day-1
 
 % RhoAT: maximum proliferation rate for activated helper T cells
-RhoAT=0.5973; % day-1
+RhoAT=0.65; 0.5973; % day-1
 
 %BetaAT: death rate of activated helper T cells
 BetaAT=0.18; % day-1
