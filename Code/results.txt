@@ -1,0 +1,182 @@
+BLASTP 2.7.1+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+Reference for composition-based statistics: Alejandro A. Schaffer,
+L. Aravind, Thomas L. Madden, Sergei Shavirin, John L. Spouge, Yuri
+I. Wolf, Eugene V. Koonin, and Stephen F. Altschul (2001),
+"Improving the accuracy of PSI-BLAST protein database searches with
+composition-based statistics and other refinements", Nucleic Acids
+Res. 29:2994-3005.
+
+
+
+Database: IEDB_Epitopes_TCell.fasta
+           19,000 sequences; 317,445 total letters
+
+
+
+Query= 15mer
+
+Length=14
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value  N
+
+108690  | immunoglobulin heavy chain variable region | Homo sapiens   42.0    8e-07  1
+108330  | immunoglobulin heavy chain variable region | Homo sapiens   39.0    6e-06  1
+108308  | immunoglobulin heavy chain variable region | Homo sapiens   35.9    5e-05  1
+108405  | immunoglobulin heavy chain variable region | Homo sapiens   35.4    7e-05  1
+108515  | immunoglobulin heavy chain variable region | Homo sapiens   32.4    6e-04  1
+108379  | immunoglobulin heavy chain variable region | Homo sapiens   28.9    0.006  1
+108273  | immunoglobulin heavy chain variable region | Homo sapiens   28.9    0.006  1
+112908  | CSF mAb MS2 immunoglobulin G heavy chain variable regio...  26.4    0.036  1
+108693  | Ig heavy chain CDR3 region | Homo sapiens                   25.4    0.072  1
+108381  | immunoglobulin heavy chain variable region | Homo sapiens   25.4    0.072  1
+112556  | Major capsid protein L1 | Alphapapillomavirus 10            12.4    607    1
+
+
+>108690 | immunoglobulin heavy chain variable region | Homo sapiens
+Length=11
+
+ Score = 42.0 bits (80),  Expect = 8e-07
+ Identities = 11/11 (100%), Positives = 11/11 (100%), Gaps = 0/11 (0%)
+
+Query  4   WGQGTLVTVSS  14
+           WGQGTLVTVSS
+Sbjct  1   WGQGTLVTVSS  11
+
+
+>108330 | immunoglobulin heavy chain variable region | Homo sapiens
+Length=11
+
+ Score = 39.0 bits (74),  Expect = 6e-06
+ Identities = 10/10 (100%), Positives = 10/10 (100%), Gaps = 0/10 (0%)
+
+Query  4   WGQGTLVTVS  13
+           WGQGTLVTVS
+Sbjct  2   WGQGTLVTVS  11
+
+
+>108308 | immunoglobulin heavy chain variable region | Homo sapiens
+Length=11
+
+ Score = 35.9 bits (68),  Expect = 5e-05
+ Identities = 9/9 (100%), Positives = 9/9 (100%), Gaps = 0/9 (0%)
+
+Query  4   WGQGTLVTV  12
+           WGQGTLVTV
+Sbjct  3   WGQGTLVTV  11
+
+
+>108405 | immunoglobulin heavy chain variable region | Homo sapiens
+Length=11
+
+ Score = 35.4 bits (67),  Expect = 7e-05
+ Identities = 10/10 (100%), Positives = 10/10 (100%), Gaps = 0/10 (0%)
+
+Query  5   GQGTLVTVSS  14
+           GQGTLVTVSS
+Sbjct  1   GQGTLVTVSS  10
+
+
+>108515 | immunoglobulin heavy chain variable region | Homo sapiens
+Length=11
+
+ Score = 32.4 bits (61),  Expect = 6e-04
+ Identities = 8/8 (100%), Positives = 8/8 (100%), Gaps = 0/8 (0%)
+
+Query  4   WGQGTLVT  11
+           WGQGTLVT
+Sbjct  4   WGQGTLVT  11
+
+
+>108379 | immunoglobulin heavy chain variable region | Homo sapiens
+Length=11
+
+ Score = 28.9 bits (54),  Expect = 0.006
+ Identities = 7/7 (100%), Positives = 7/7 (100%), Gaps = 0/7 (0%)
+
+Query  4   WGQGTLV  10
+           WGQGTLV
+Sbjct  5   WGQGTLV  11
+
+
+>108273 | immunoglobulin heavy chain variable region | Homo sapiens
+Length=11
+
+ Score = 28.9 bits (54),  Expect = 0.006
+ Identities = 7/7 (100%), Positives = 7/7 (100%), Gaps = 0/7 (0%)
+
+Query  4   WGQGTLV  10
+           WGQGTLV
+Sbjct  5   WGQGTLV  11
+
+
+>112908 | CSF mAb MS2 immunoglobulin G heavy chain variable region | 
+Homo sapiens
+Length=19
+
+ Score = 26.4 bits (49),  Expect = 0.036
+ Identities = 6/7 (86%), Positives = 6/7 (86%), Gaps = 0/7 (0%)
+
+Query  1   FAYWGQG  7
+           F YWGQG
+Sbjct  13  FDYWGQG  19
+
+
+>108693 | Ig heavy chain CDR3 region | Homo sapiens
+Length=11
+
+ Score = 25.4 bits (47),  Expect = 0.072
+ Identities = 6/6 (100%), Positives = 6/6 (100%), Gaps = 0/6 (0%)
+
+Query  4   WGQGTL  9
+           WGQGTL
+Sbjct  6   WGQGTL  11
+
+
+>108381 | immunoglobulin heavy chain variable region | Homo sapiens
+Length=11
+
+ Score = 25.4 bits (47),  Expect = 0.072
+ Identities = 6/6 (100%), Positives = 6/6 (100%), Gaps = 0/6 (0%)
+
+Query  4   WGQGTL  9
+           WGQGTL
+Sbjct  6   WGQGTL  11
+
+
+>112556 | Major capsid protein L1 | Alphapapillomavirus 10
+Length=20
+
+ Score = 12.4 bits (21),  Expect = 607
+ Identities = 3/3 (100%), Positives = 3/3 (100%), Gaps = 0/3 (0%)
+
+Query  10  VTV  12
+           VTV
+Sbjct  17  VTV  19
+
+
+
+Lambda      K        H
+   0.347    0.275     1.90 
+
+
+Effective search space used: 1627560
+
+
+  Database: IEDB_Epitopes_TCell.fasta
+    Posted date:  Nov 16, 2018  7:50 AM
+  Number of letters in database: 317,445
+  Number of sequences in database:  19,000
+
+
+
+Matrix: PAM30
+Neighboring words threshold: 16
+Window for multiple hits: 15

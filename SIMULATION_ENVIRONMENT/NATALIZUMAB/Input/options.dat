@@ -1,0 +1,12 @@
+NATALIZUMAB %Name of the antigen
+WORLD %Name of the cohort
+UniqueWorldCohort.csv %Filename for cohort HLAs - filetype: .csv
+sequence.fasta %Filename for antigen sequence - filetype: .fasta
+100 %Number of runs
+0.61 %Mean antigen specific CD4+ T-cell frequency (per million CD4+)
+0.13 %Standard deviation of antigen specific CD4+ T-cell frequency (per million CD4+)
+1.9 %Stimulation index cutoff
+0.05 %p-value for significance in SI
+/home/osman.yogurtcu/Downloads/ncbi-blast-2.7.1+/bin/ %locBLASTbin
+/home/osman.yogurtcu/Downloads/ncbi-blast-2.7.1+/IEDB_Epitopes_TCell/ %locEpitopeDB
+IEDB_Epitopes_TCell %EpitopeDB
